@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+
+{% block body %}
+
+<div class="row">
+    <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4">
+        <h1>Registro </h1>
+        <div class="card">
+            <div class="card-body">
+
+            <form action="registrarMaterias/" method="POST">{% csrf_token %}
+                <div class="from-group py-2">
+                    <input type="text" id="txtcodigo" name="txtcodigo" placeholder="Codigo materia" minlenght="1" maxlenght="6" required>
+                </div>
+                <div class="from-group py-2">
+                    <input type="text" id="txtmateria" name="txtmateria" placeholder="Nombre materia" minlenght="1" maxlenght="100" required>
+                </div>
+                <div class="from-group py-2">
+                    <input type="text" id="numcreditos" name="numcreditos" placeholder="Creditos materia" min="1" max="9" value="1" required>
+                </div>
+                </div>
+                <div class="from-group py-2">
+                    <button type="submit" class="btn btn-primary">Guardar Materia</button>
+                </div>
+            </div>
+            </form>
+    </div>
+    <div class="col-sm-12 col-md-8 col-lg-8 col-xl-8">
+        <h1>Listado de Materias </h1>
+        <!--la tabla-->
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Codigo</th>
+                <th scope="col">Nombre</th>
+                <th scope="col">Creditos</th>
+            </tr>
+            </thead>
+            <tbody>
+        {% for m in mismaterias %}
+        <tr>
+            <td>
+                {{forloop.counter}}
+            </td>
+            <td>
+                {{m.codigo}}
+            </td>
+            <td>
+                {{m.nombre}}
+            </td>
+            <td>
+                {{m.creditos}}
+            </td>
+        </tr>
+
+        {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+{% endblock %}

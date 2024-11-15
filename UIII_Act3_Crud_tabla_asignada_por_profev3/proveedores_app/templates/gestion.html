@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+
+{% block cuerpo %}
+<div class="row"><!--La fila-->
+    <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4"><!--Columna izquierda-->
+        <h1>Registrar Proveedores</h1>
+        <div class="card"> <!-- La tarjeta -->
+<div class="card-body">
+    <form action="registrar/" method="POST"> {% csrf_token %}<!-- Falta action -->
+    <div class="form-group">
+        <input type="text" id="txtcodigo" name="txtcodigo" class="form-control" placeholder="Id del Proveedor" minlength="1" maxlenght="6" required><br>
+    </div>
+    <div class="form-group py-3">
+        <input type="text" id="txtnombre" name="txtnombre" class="form-control" placeholder="Nombre del Proveedor" maxlenght="100" required><br>
+    </div>
+    <div class="form-group py-3">
+        <input type="text" id="txttelefono" name="txttelefono" class="form-control" placeholder="Tel. del Proveedor" maxlenght="100" required><br>
+    </div>
+    <div class="form-group py-3">
+        <input type="text" id="txtcorreo" name="txtcorreo" class="form-control" placeholder="Correo del Proveedor" maxlenght="100" required><br>
+    </div>
+    <div class="form-group py-3">
+        <input type="text" id="txtgerente" name="txtgerente" class="form-control" placeholder="Nombre del Gerente" maxlenght="100" required><br>
+    </div>
+    <div class="form-group">
+        <input type="text" id="num" name="numcantidad" class="form-control" min="1" max="9" value="1" required><br>
+    </div>
+    <div class="form-group py-3">
+        <input type="date" id="txtfecha" name="datefecha" class="form-control" placeholder="Fecha de entrega" maxlenght="100" required><br>
+    </div>
+    <div class="form-group py-2">
+        <button type="submit" class="btn btn-primary">Guardar</button>
+    </div>
+    </form>
+</div>
+</div>
+    </div><!--Columna izquierda-->
+    <div class="col-sm-12 col-md-8 col-lg-8 col-xl-8"><!--Columna derecha-->
+        <h1>Listado de Proveedores</h1>
+        <!--Tablas-->
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">id</th>
+            <th scope="col">Nombre</th>
+            <th scope="col">Telefono</th>
+            <th scope="col">Correo</th>
+            <th scope="col">Gerente</th>
+            <th scope="col">Cantidad</th>
+            <th scope="col">Fecha de entrega</th>
+            <th> Opciones </th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for m in misproveedores %}
+        <tr>
+            <td> {{forloop.counter}}</td>
+            <td> {{m.codigo}}</td>
+            <td> {{m.nombre}}</td>
+            <td> {{m.telefono}}</td>
+            <td> {{m.correo}}</td>
+            <td> {{m.gerente}}</td>
+            <td> {{m.cantidad}}</td>
+            <td> {{m.fecha}}</td>
+            <td> <a href="seleccionar/{{m.codigo}}" class="btn btn-info"> Editar</a></td><!-- Falta -->
+            <td> <a href="borrar/{{m.codigo}}" class="btn btn-danger"> Borrar</a></td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <!--Tabla-->
+    </div><!--Columna derecha-->
+    
+</div><!--La fila-->
+
+{% endblock %}
